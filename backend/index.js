@@ -1,15 +1,13 @@
-const Dragon = require("./dragon");
+const Generation = require("./generation");
 
-const sandy = new Dragon({ birthdate: new Date(), nickname: "sandy" });
-const cate = new Dragon({ birthdate: new Date(), nickname: "cate" });
+const generation = new Generation();
 
-const sarah = new Dragon();
+console.log("generation", generation);
+
+const sandy = generation.newDragon({ nickname: "sandy" });
+console.log("sandy", sandy);
 
 setTimeout(() => {
-  const tammy = new Dragon();
-  console.log("tammy", tammy);
-}, 3000);
-
-console.log("sandy", sandy);
-console.log("cate", cate);
-console.log("sarah", sarah);
+  const cate = generation.newDragon();
+  console.log("cate", cate);
+}, 15000);
