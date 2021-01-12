@@ -25,7 +25,7 @@ The promise returns an error.
 
 **To handle these resolved values or rejected errors, we use **handlers**.**
 
-## Handlers
+### Handlers
 
 - `.then` handler, with a callback which present the resolved values: `.then` only takes one argument which is a callback function, and the parameter to this callback function is gonna **match one to one** the resolve value from the function.
   - We could pass any structure syntax into the `resolve` callback;
