@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./bin/server",
     "dev": "nodemon ./bin/server",
-    "configure": "./bin/configure_db.sh"
+    "configure": "./bin/configure_db.sh",
+    "configure-dev": "yarn configure && yarn dev"
   },
   "author": "",
   "license": "ISC",
