@@ -1,31 +1,31 @@
-# About
+# 1. About
 
 The code of learning on Udemy course [Master Full-stack Web Development](https://www.udemy.com/course/full-stack/).
 
-## JavaScript Promises
+# 2. JavaScript Promises
 
-### What are JavaScript Promises?
+## (1) What are JavaScript Promises?
 
 - The guaranteed future of an eventual value: can't be broken until resolved or rejected
 - The completion or failure of an **asynchronous** operation
 - Enfore **order** and coordinate asynchronous behavior
 
-### How do they work?
+## (2) How do they work?
 
 - Functions that accept a callback: only accepts one parameter which is the callback, the callback accepts two parameters which are `resolve` and `reject`
 - Wraps around **resolve** and **reject** functions
 
-#### Resolve
+### i. Resolve
 
 Asynchronous functionality has succeeded. Return a value.
 
-#### Reject
+### ii. Reject
 
 The promise returns an error.
 
 **To handle these resolved values or rejected errors, we use **handlers**.**
 
-### Handlers
+## (3) Handlers
 
 - `.then` handler, with a callback which present the resolved values: `.then` only takes one argument which is a callback function, and the parameter to this callback function is gonna **match one to one** the resolve value from the function.
   - We could pass any structure syntax into the `resolve` callback;
@@ -47,7 +47,7 @@ examplePromise
   .catch((error) => console.error("error", error));
 ```
 
-### Chaining
+## (4) Chaining
 
 - Return promises as the result of promises
 - Chain multiple promises to **enfore order over asynchronous tasks**
