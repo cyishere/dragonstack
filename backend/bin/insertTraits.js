@@ -8,14 +8,15 @@ TRAITS.forEach((TRAIT) => {
   traitValues.forEach((traitValue) => {
     pool.query(
       `INSERT INTO trait("traitType", "traitValue")
-       VALUE($1, $2) RETURNING id`,
+       VALUES($1, $2)
+       RETURNING id`,
       [traitType, traitValue],
       (error, response) => {
         if (error) console.error(error);
 
         const traitId = response.rows[0].id;
 
-        console.log(`Inserted id - traitId: ${traitId}`);
+        console.log(`Inserted trait - id: ${traitId}`);
       }
     );
   });
