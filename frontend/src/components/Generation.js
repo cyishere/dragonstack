@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Generation = () => {
-  const generation = { generationId: 999, expiration: "2021-05-01" };
+  const [generation, setGeneration] = useState({
+    generationId: 999,
+    expiration: "2021-05-01",
+  });
+
+  const fetchGeneration = () => {
+    fetch("http://localhost:3001/generation")
+      .then((response) => console.log("response", response))
+      .catch((error) => console.error("error", error));
+  };
+
+  useEffect(() => {
+    fetchGeneration();
+  }, []);
 
   return (
     <div>
