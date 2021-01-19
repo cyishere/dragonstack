@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist .cache",
-    "start": "yarn clean && parcel index.html",
+    "start": "yarn clean && parcel src/index.html",
     "dev": "yarn start"
   },
   "keywords": [],
