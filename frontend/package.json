@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf dist .cache",
+    "start": "yarn clean && parcel index.html",
+    "dev": "yarn start"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
     "react-dom": "16.2.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1"
