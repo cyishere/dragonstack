@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 
+const DEFAULT_GENERATION = {
+  generationId: "",
+  expiration: "",
+};
+
 const Generation = () => {
-  const [generation, setGeneration] = useState({
-    generationId: 999,
-    expiration: "2021-05-01",
-  });
+  const [generation, setGeneration] = useState(DEFAULT_GENERATION);
 
   const fetchGeneration = () => {
     fetch("http://localhost:3001/generation")
-      .then((response) => console.log("response", response))
+      .then((response) => response.json())
+      .then((json) => {
+        setGeneration(json.generation);
+      })
       .catch((error) => console.error("error", error));
   };
 
