@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const GenerationEngine = require("./generation/engine");
 const dragonRouter = require("./api/dragon");
 const generationRouter = require("./api/generation");
@@ -8,6 +9,8 @@ const engine = new GenerationEngine();
 
 // make `engine` global in the app
 app.locals.engine = engine;
+
+app.use(cors({ origin: "http://localhost:1234" }));
 
 /**
  * Routes
