@@ -1,4 +1,3 @@
-const { response } = require("express");
 const pool = require("../../databasePool");
 const DragonTable = require("./table");
 const Dragon = require("./index");
