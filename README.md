@@ -74,3 +74,13 @@ new Promise((resolve, reject) => {
     console.log(message); // Hello World!!!
   });
 ```
+
+## 3. Other Notes
+
+A recursive function means one that calls itself.
+
+`componentWillUnmount()`
+
+This is because it's best to place data in the state when we expect that data to be reflected and rendered in the actual React component. The reference to the timer is fine to attach the component itself since its eventual effect is a call a function that updates the state. It's not dependent or rather it shouldn't exist within the state itself.
+
+In other words the reference itself is not something that will directly affect the appearance of the application.
