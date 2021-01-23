@@ -7,6 +7,7 @@ render(
   <div>
     <h2>Dragon Stack from React</h2>
     <Generation />
+    <hr />
     <Dragon />
   </div>,
   document.getElementById("root")

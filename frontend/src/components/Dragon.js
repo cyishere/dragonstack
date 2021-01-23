@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import DragonAvatar from "./DragonAvatar";
 
 const DEFAULT_DRAGON = {
   dragonId: "",
@@ -22,17 +23,7 @@ const Dragon = () => {
     fetchDragon();
   }, []);
 
-  return (
-    <div>
-      {dragon.dragonId && (
-        <div>
-          <p>Generation: {dragon.generationId}</p>
-          <p>Dragon ID: {dragon.dragonId}</p>
-          <p>{dragon.traits.map((trait) => trait.traitValue).join(", ")}</p>
-        </div>
-      )}
-    </div>
-  );
+  return <DragonAvatar dragon={dragon} />;
 };
 
 export default Dragon;
