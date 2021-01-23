@@ -4,7 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import Generation from "./components/Generation";
 import Dragon from "./components/Dragon";
 
-import generationReducer, { fetchGeneration } from "./features/generationSlice";
+import generationReducer, { fetchGeneration } from "./slices/generationSlice";
 
 import "./index.css";
 
