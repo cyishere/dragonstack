@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const DEFAULT_GENERATION = {
@@ -11,7 +11,7 @@ const MINIMUM_DELAY = 3000;
 const Generation = () => {
   const [generation, setGeneration] = useState(DEFAULT_GENERATION);
 
-  let timer = null;
+  const mouted = useRef(false);
 
   const fetchGeneration = () => {
     fetch("http://localhost:3001/generation")
@@ -22,26 +22,32 @@ const Generation = () => {
       .catch((error) => console.error("error", error));
   };
 
-  const fetchNextGeneration = () => {
-    fetchGeneration();
-    console.log("generation: ", generation.generationId);
-
-    let delay =
-      new Date(generation.expiration).getTime() - new Date().getTime();
-
-    if (delay < MINIMUM_DELAY) {
-      delay = MINIMUM_DELAY;
-    }
-
-    timer = setTimeout(() => fetchNextGeneration(), delay);
-  };
-
   useEffect(() => {
+    mouted.current = true;
+
+    let timer = null;
+
+    const fetchNextGeneration = () => {
+      fetchGeneration();
+
+      let delay =
+        new Date(generation.expiration).getTime() - new Date().getTime();
+
+      if (delay < MINIMUM_DELAY) {
+        delay = MINIMUM_DELAY;
+      }
+
+      if (mouted.current) {
+        timer = setTimeout(() => fetchNextGeneration(), delay);
+      }
+    };
     fetchNextGeneration();
 
     // returned function will be called on component unmount
     return () => {
       clearTimeout(timer);
+
+      return (mouted.current = false);
     };
   }, []);
 
