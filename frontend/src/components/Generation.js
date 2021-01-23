@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 
 const DEFAULT_GENERATION = {
   generationId: "",
@@ -55,9 +54,6 @@ const Generation = () => {
     <div>
       <h3>Generation {generation.generationId}. Expires on:</h3>
       <h4>{new Date(generation.expiration).toString()}</h4>
-      <p>
-        Take me to <Link to="/another">another place</Link>.
-      </p>
     </div>
   );
 };
