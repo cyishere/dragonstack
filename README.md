@@ -84,3 +84,9 @@ A recursive function means one that calls itself.
 This is because it's best to place data in the state when we expect that data to be reflected and rendered in the actual React component. The reference to the timer is fine to attach the component itself since its eventual effect is a call a function that updates the state. It's not dependent or rather it shouldn't exist within the state itself.
 
 In other words the reference itself is not something that will directly affect the appearance of the application.
+
+🔥 **About how to use `setTimeout()` & `clearTimeout()`:**
+
+- [React hooks - right way to clear timeouts and intervals](https://stackoverflow.com/questions/53090432/react-hooks-right-way-to-clear-timeouts-and-intervals)
+- [setTimeout in React Components Using Hooks](https://upmostly.com/tutorials/settimeout-in-react-components-using-hooks)
+- [Using refs to check if a component is still mounted](https://dev.to/tusharkashyap63/use-refs-to-check-if-a-component-is-still-mounted-2gk7)
