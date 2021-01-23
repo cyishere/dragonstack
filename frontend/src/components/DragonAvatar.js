@@ -2,6 +2,7 @@ import React from "react";
 
 const DragonAvatar = ({ dragon }) => {
   const { generationId, dragonId, traits } = dragon;
+
   return (
     <div>
       <span>G{generationId}.</span>

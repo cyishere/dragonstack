@@ -1,7 +1,7 @@
 [
   {
     "type": "backgroundColor",
-    "values": ["black", "white", "yellow", "pink"]
+    "values": ["black", "white", "green", "blue"]
   },
   {
     "type": "pattern",
@@ -13,6 +13,6 @@
   },
   {
     "type": "size",
-    "values": ["small", "medium", "large", "enormouse"]
+    "values": ["small", "medium", "large", "enormous"]
   }
 ]
