@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import DragonAvatar from "./DragonAvatar";
 
 const DEFAULT_DRAGON = {
@@ -23,7 +24,12 @@ const Dragon = () => {
     fetchDragon();
   }, []);
 
-  return <DragonAvatar dragon={dragon} />;
+  return (
+    <div>
+      <Button onClick={() => fetchDragon()}>New Dragon</Button>
+      <DragonAvatar dragon={dragon} />
+    </div>
+  );
 };
 
 export default Dragon;
