@@ -90,3 +90,21 @@ In other words the reference itself is not something that will directly affect t
 - [React hooks - right way to clear timeouts and intervals](https://stackoverflow.com/questions/53090432/react-hooks-right-way-to-clear-timeouts-and-intervals)
 - [setTimeout in React Components Using Hooks](https://upmostly.com/tutorials/settimeout-in-react-components-using-hooks)
 - [Using refs to check if a component is still mounted](https://dev.to/tusharkashyap63/use-refs-to-check-if-a-component-is-still-mounted-2gk7)
+
+🔥 **Parcel Error**:
+
+When I add async to the app, it occurred this error:
+
+![parcel error](./doc_images/parcel_error.png)
+
+The solution is add code below to `package.json`. For more information click [here](https://flaviocopes.com/parcel-regeneratorruntime-not-defined/).
+
+```json
+"browserslist": [
+  "last 3 and_chr versions",
+  "last 3 chrome versions",
+  "last 3 opera versions",
+  "last 3 ios_saf versions",
+  "last 3 safari versions"
+]
+```

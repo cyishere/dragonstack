@@ -1,25 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-
-const DEFAULT_GENERATION = {
-  generationId: "",
-  expiration: "",
-};
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGeneration } from "../slices/generationSlice";
 
 const MINIMUM_DELAY = 3000;
 
 const Generation = () => {
-  const [generation, setGeneration] = useState(DEFAULT_GENERATION);
+  // const [generation, setGeneration] = useState(DEFAULT_GENERATION);
+  const generation = useSelector((state) => state.generation);
+  console.log({ generation });
+
+  const dispatch = useDispatch();
 
   const mouted = useRef(false);
-
-  const fetchGeneration = () => {
-    fetch("http://localhost:3001/generation")
-      .then((response) => response.json())
-      .then((json) => {
-        setGeneration(json.generation);
-      })
-      .catch((error) => console.error("error", error));
-  };
 
   useEffect(() => {
     mouted.current = true;
@@ -27,7 +19,7 @@ const Generation = () => {
     let timer = null;
 
     const fetchNextGeneration = () => {
-      fetchGeneration();
+      dispatch(fetchGeneration());
 
       let delay =
         new Date(generation.expiration).getTime() - new Date().getTime();

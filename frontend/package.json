@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
+    "axios": "^0.21.1",
     "react": "16.8.0",
     "react-bootstrap": "0.32.1",
     "react-dom": "16.8.0",
@@ -24,5 +25,12 @@
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1"
-  }
+  },
+  "browserslist": [
+    "last 3 and_chr versions",
+    "last 3 chrome versions",
+    "last 3 opera versions",
+    "last 3 ios_saf versions",
+    "last 3 safari versions"
+  ]
 }
