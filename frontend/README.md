@@ -1,3 +1,33 @@
+The course's code of Generation actions:
+
+```js
+const fetchGeneration = () => {
+  dispatch({ type: GENERATION.FETCH });
+
+  return fetch(apiUrl)
+    .then((response) => response.json())
+    .then((json) => {
+      if (json.type === "error") {
+        dispatch({
+          type: GENERATION.FETCH_ERROR,
+          message: json.message,
+        });
+      } else {
+        dispatch({
+          type: GENERATION.FETCH_SUCCESS,
+          generation: json.generation,
+        });
+      }
+    })
+    .catch((error) =>
+      dispatch({
+        type: GENERATION.FETCH_ERROR,
+        message: error.message,
+      })
+    );
+};
+```
+
 The code backup of Dragon Avatar Image
 
 ```js
