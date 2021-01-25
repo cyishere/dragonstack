@@ -15,7 +15,7 @@ export const fetchGeneration = createAsyncThunk(
   () => {
     return fetch(apiUrl)
       .then((response) => response.json())
-      .then((json) => json.generation)
+      .then((json) => json)
       .catch((error) => {
         console.error({ error });
         return error.message;
@@ -32,9 +32,14 @@ const generationSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchGeneration.fulfilled]: (state, action) => {
-      const { generationId, expiration } = action.payload;
-      state.generationId = generationId;
-      state.expiration = expiration;
+      // `action.payload` is `json`
+      if (action.payload.type === "error") {
+        state.message = action.payload.message;
+      } else {
+        const { generationId, expiration } = action.payload.generation;
+        state.generationId = generationId;
+        state.expiration = expiration;
+      }
     },
     [fetchGeneration.rejected]: (state, action) => {
       state.message = action.payload;
