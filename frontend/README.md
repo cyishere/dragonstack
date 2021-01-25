@@ -1,3 +1,5 @@
+To use ES6 spread, need to add this dependency: `babel-plugin-transform-object-rest-spread`. In this course version is `6.26.0`.
+
 The course's code of Generation actions:
 
 ```js

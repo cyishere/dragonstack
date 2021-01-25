@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import fetchStates from "../utils/fetchStates";
 
 const initialState = {
   generationId: "",
@@ -18,6 +19,7 @@ export const fetchGeneration = createAsyncThunk(
       .then((json) => json)
       .catch((error) => {
         console.error({ error });
+        // error = { type: "", message: "" }
         return error.message;
       });
   }
@@ -31,17 +33,23 @@ const generationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [fetchGeneration.pending]: (state, action) => {
+      state.status = fetchStates.fetching;
+    },
     [fetchGeneration.fulfilled]: (state, action) => {
       // `action.payload` is `json`
       if (action.payload.type === "error") {
+        state.status = fetchStates.error;
         state.message = action.payload.message;
       } else {
+        state.status = fetchStates.success;
         const { generationId, expiration } = action.payload.generation;
         state.generationId = generationId;
         state.expiration = expiration;
       }
     },
     [fetchGeneration.rejected]: (state, action) => {
+      state.status = fetchStates.error;
       state.message = action.payload;
     },
   },

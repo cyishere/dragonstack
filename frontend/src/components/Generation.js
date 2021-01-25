@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGeneration } from "../slices/generationSlice";
+import fetchStates from "../utils/fetchStates";
 
 const MINIMUM_DELAY = 3000;
 
 const Generation = () => {
   // const [generation, setGeneration] = useState(DEFAULT_GENERATION);
   const generation = useSelector((state) => state.generation);
-  console.log({ generation });
 
   const dispatch = useDispatch();
 
@@ -41,6 +41,11 @@ const Generation = () => {
       return (mouted.current = false);
     };
   }, []);
+
+  // could not add this on top of everything, it doesn't work
+  if (generation.status === fetchStates.error) {
+    return <div style={{ color: "red" }}>{generation.message}</div>;
+  }
 
   return (
     <div>
