@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGeneration } from "../slices/generationSlice";
-import fetchStates from "../utils/fetchStates";
+import fetchStates from "../slices/fetchStates";
 
 const MINIMUM_DELAY = 3000;
 

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import fetchStates from "../utils/fetchStates";
+import fetchStates from "./fetchStates";
+import { BACKEND } from "../config";
 
 const initialState = {
   generationId: "",
@@ -9,12 +10,10 @@ const initialState = {
 /**
  * async thunk
  */
-const apiUrl = "http://localhost:3001/generation";
-
 export const fetchGeneration = createAsyncThunk(
   "generation/fetchGenerationFromApi",
   () => {
-    return fetch(apiUrl)
+    return fetch(`${BACKEND.ADDRESS}/generation`)
       .then((response) => response.json())
       .then((json) => json)
       .catch((error) => {

@@ -1,6 +1,6 @@
 import React from "react";
-import Generation from "./components/Generation";
-import Dragon from "./components/Dragon";
+import Generation from "../components/Generation";
+import Dragon from "../components/Dragon";
 
 const App = () => {
   return (

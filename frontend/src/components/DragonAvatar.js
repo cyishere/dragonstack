@@ -3,6 +3,8 @@ import React from "react";
 const DragonAvatar = ({ dragon }) => {
   const { generationId, dragonId, traits } = dragon;
 
+  if (!dragonId) return <div></div>;
+
   return (
     <div>
       <span>G{generationId}.</span>
