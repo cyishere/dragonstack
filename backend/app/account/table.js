@@ -1,4 +1,3 @@
-const { response } = require("express");
 const pool = require("../../databasePool");
 
 class AccountTable {
@@ -11,6 +10,21 @@ class AccountTable {
           if (error) return reject(error);
 
           resolve();
+        }
+      );
+    });
+  }
+
+  static getAccount({ usernameHash }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `SELECT id, "passwordHash" FROM account
+         WHERE "usernameHash" = $1`,
+        [usernameHash],
+        (error, response) => {
+          if (error) return reject(error);
+
+          resolve({ account: response.rows[0] });
         }
       );
     });
