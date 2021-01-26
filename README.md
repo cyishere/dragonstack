@@ -95,7 +95,7 @@ In other words the reference itself is not something that will directly affect t
 
 When I add async to the app, it occurred this error:
 
-![parcel error](./doc_images/parcel_error.png)
+![parcel error](./parcel_error.png)
 
 The solution is add code below to `package.json`. For more information click [here](https://flaviocopes.com/parcel-regeneratorruntime-not-defined/).
 
