@@ -4,11 +4,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import generationReducer from "./slices/generationSlice";
 import dragonReducer from "./slices/dragonSlice";
+import accountReducer from "./slices/accountSlice";
 import Root from "./components/Root";
 import "./index.css";
 
 const store = configureStore({
-  reducer: { generation: generationReducer, dragon: dragonReducer },
+  reducer: {
+    account: accountReducer,
+    dragon: dragonReducer,
+    generation: generationReducer,
+  },
 });
 
 // store.subscribe(() => console.log(store.getState()));
