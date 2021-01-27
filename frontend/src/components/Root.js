@@ -1,9 +1,12 @@
 import React from "react";
 import Home from "./Home";
 import AuthForm from "./AuthForm";
+import { useSelector } from "react-redux";
 
 const Root = () => {
-  return false ? <Home /> : <AuthForm />;
+  const { loggedIn } = useSelector((state) => state.account);
+
+  return loggedIn ? <Home /> : <AuthForm />;
 };
 
 export default Root;

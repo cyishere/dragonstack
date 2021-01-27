@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../slices/accountSlice";
+import fetchStates from "../slices/fetchStates";
 
 const AuthForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const { status, message } = useSelector((state) => state.account);
+
   const dispatch = useDispatch();
 
   const handleSignup = () => {
     dispatch(signup({ username, password }));
+    setUsername("");
+    setPassword("");
   };
 
   const handleLogin = () => {
@@ -42,6 +47,12 @@ const AuthForm = () => {
         <span> or </span>
         <Button onClick={handleSignup}>Sign Up</Button>
       </div>
+      {status === fetchStates.error && (
+        <p style={{ color: "red" }}>{message}</p>
+      )}
+      {status === fetchStates.success && (
+        <p style={{ color: "green" }}>{message}</p>
+      )}
     </div>
   );
 };
