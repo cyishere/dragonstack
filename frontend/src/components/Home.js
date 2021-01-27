@@ -1,8 +1,8 @@
 import React from "react";
-import Generation from "../components/Generation";
-import Dragon from "../components/Dragon";
+import Generation from "./Generation";
+import Dragon from "./Dragon";
 
-const App = () => {
+const Home = () => {
   return (
     <div>
       <h2>Dragon Stack</h2>
@@ -13,4 +13,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
