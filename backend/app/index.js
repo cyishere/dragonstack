@@ -13,7 +13,7 @@ const engine = new GenerationEngine();
 // make `engine` global in the app
 app.locals.engine = engine;
 
-app.use(cors({ origin: "http://localhost:1234" }));
+app.use(cors({ origin: "http://localhost:1234", credentials: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 

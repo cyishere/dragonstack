@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { signup } from "../slices/accountSlice";
 
 const AuthForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
   const handleSignup = () => {
-    console.log({ username });
-    console.log({ password });
+    dispatch(signup({ username, password }));
   };
 
   const handleLogin = () => {
