@@ -5,6 +5,9 @@ const { setSession } = require("./helper");
 
 const router = new Router();
 
+/**
+ * Register
+ */
 router.post("/signup", (req, res, next) => {
   const { username, password } = req.body;
 
@@ -26,9 +29,30 @@ router.post("/signup", (req, res, next) => {
     .then(() => {
       return setSession({ username, res });
     })
-    .then(({ message }) => {
-      res.json({ message });
+    .then(({ message }) => res.json({ message }))
+    .catch((error) => next(error));
+});
+
+/**
+ * LOGIN
+ */
+router.post("/login", (req, res, next) => {
+  const { username, password } = req.body;
+
+  AccountTable.getAccount({ usernameHash: hash(username) })
+    .then(({ account }) => {
+      if (account && account.passwordHash === hash(password)) {
+        const { sessionId } = account;
+        return setSession({ username, res, sessionId });
+      } else {
+        const error = new Error("Incorrect username or password");
+
+        error.statusCode = 409;
+
+        throw error;
+      }
     })
+    .then(({ message }) => res.json({ message }))
     .catch((error) => next(error));
 });
 
