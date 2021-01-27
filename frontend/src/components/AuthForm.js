@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../slices/accountSlice";
+import { login, signup } from "../slices/accountSlice";
 import fetchStates from "../slices/fetchStates";
 
 const AuthForm = () => {
@@ -19,8 +19,9 @@ const AuthForm = () => {
   };
 
   const handleLogin = () => {
-    console.log({ username });
-    console.log({ password });
+    dispatch(login({ username, password }));
+    setUsername("");
+    setPassword("");
   };
 
   return (
@@ -43,7 +44,9 @@ const AuthForm = () => {
         />
       </FormGroup>
       <div>
-        <Button onClick={handleLogin}>Log In</Button>
+        <Button bsStyle="primary" onClick={handleLogin}>
+          Log In
+        </Button>
         <span> or </span>
         <Button onClick={handleSignup}>Sign Up</Button>
       </div>

@@ -19,7 +19,9 @@ const Dragon = () => {
 
   return (
     <div>
-      <Button onClick={handleClickNew}>New Dragon</Button>
+      <Button bsStyle="primary" onClick={handleClickNew}>
+        New Dragon
+      </Button>
       <DragonAvatar dragon={dragon} />
     </div>
   );
