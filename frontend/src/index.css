@@ -4,6 +4,12 @@ body {
   font-size: 20px;
 }
 
-button:focus {
+button.btn:focus {
   outline: none;
+}
+
+.btn-logout {
+  position: absolute;
+  top: 30px;
+  right: 30px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Generation from "./Generation";
 import Dragon from "./Dragon";
+import AccountDragons from "./AccountDragons";
 import AuthLogout from "./AuthLogout";
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
       <Generation />
       <Dragon />
       <hr />
+      <AccountDragons />
       <AuthLogout />
     </div>
   );

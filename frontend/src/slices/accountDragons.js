@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchFromAccount } from "./accountSlice";
+import { BACKEND } from "../config";
 import fetchStates from "./fetchStates";
 
 const initialState = { dragons: [] };
@@ -11,12 +11,15 @@ const initialState = { dragons: [] };
 export const fetchDragonsByAccount = createAsyncThunk(
   "accountDragons/fetchDragonsByAccount",
   () => {
-    fetchFromAccount({
-      endpoint: "dragons",
-      options: {
-        credentials: "include",
-      },
-    });
+    return fetch(`${BACKEND.ADDRESS}/account/dragons`, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((json) => json)
+      .catch((error) => {
+        console.log(`error in ${endpoint} action:`, error);
+        return error.message;
+      });
   }
 );
 

@@ -10,7 +10,11 @@ const AuthLogout = () => {
     dispatch(logout());
   };
 
-  return <Button onClick={handleLogout}>Log Out</Button>;
+  return (
+    <Button onClick={handleLogout} className="btn-logout">
+      Log Out
+    </Button>
+  );
 };
 
 export default AuthLogout;
