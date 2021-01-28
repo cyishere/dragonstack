@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDragon } from "../slices/dragonSlice";
@@ -8,10 +8,6 @@ const Dragon = () => {
   const dragon = useSelector((state) => state.dragon);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchDragon());
-  }, []);
 
   const handleClickNew = () => {
     dispatch(fetchDragon());
