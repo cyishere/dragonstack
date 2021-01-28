@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchDragonsByAccount } from "../slices/accountDragons";
+import AccountDragonRow from "./AccountDragonRow";
 
 const AccountDragons = () => {
+  const { dragons } = useSelector((state) => state.accountDragons);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,6 +15,12 @@ const AccountDragons = () => {
   return (
     <div>
       <h3>Account Dragons</h3>
+      {dragons.map((dragon) => (
+        <div key={dragon.dragonId}>
+          <AccountDragonRow dragon={dragon} />
+          <hr />
+        </div>
+      ))}
     </div>
   );
 };
