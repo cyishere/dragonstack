@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import generationReducer from "./slices/generationSlice";
 import dragonReducer from "./slices/dragonSlice";
 import accountReducer from "./slices/accountSlice";
+import accountDragonsReducer from "./slices/accountDragons";
 import Root from "./components/Root";
 import { fetchAuthenticated } from "./slices/accountSlice";
 import "./index.css";
@@ -14,6 +15,7 @@ const store = configureStore({
     account: accountReducer,
     dragon: dragonReducer,
     generation: generationReducer,
+    accountDragons: accountDragonsReducer,
   },
 });
 
