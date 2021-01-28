@@ -7,18 +7,21 @@ import fetchStates from "../slices/fetchStates";
 const AuthForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [buttonClicked, setButtonClicked] = useState(false);
 
   const { status, message } = useSelector((state) => state.account);
 
   const dispatch = useDispatch();
 
   const handleSignup = () => {
+    setButtonClicked(true);
     dispatch(signup({ username, password }));
     setUsername("");
     setPassword("");
   };
 
   const handleLogin = () => {
+    setButtonClicked(true);
     dispatch(login({ username, password }));
     setUsername("");
     setPassword("");
@@ -50,10 +53,10 @@ const AuthForm = () => {
         <span> or </span>
         <Button onClick={handleSignup}>Sign Up</Button>
       </div>
-      {status === fetchStates.error && (
+      {status === fetchStates.error && buttonClicked && (
         <p style={{ color: "red" }}>{message}</p>
       )}
-      {status === fetchStates.success && (
+      {status === fetchStates.success && buttonClicked && (
         <p style={{ color: "green" }}>{message}</p>
       )}
     </div>
