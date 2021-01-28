@@ -57,6 +57,18 @@ export const logout = createAsyncThunk("account/logout", () =>
   })
 );
 
+// authenticated
+export const fetchAuthenticated = createAsyncThunk(
+  "account/fetchAuthenticated",
+  () =>
+    fetchFromAccount({
+      endpoint: "authenticated",
+      options: {
+        credentials: "include",
+      },
+    })
+);
+
 /**
  * Helper Functions
  */
@@ -72,6 +84,8 @@ const fulfilledAction = ({ state, action, ACTION_TYPE }) => {
     state.status = fetchStates.success;
     if (ACTION_TYPE === "logout") {
       state.loggedIn = false;
+    } else if (ACTION_TYPE === "authenticated") {
+      state.loggedIn = action.payload.authenticated;
     } else {
       state.loggedIn = true;
     }
@@ -118,6 +132,13 @@ const accountSlice = createSlice({
       fulfilledAction({ state, action, ACTION_TYPE: "logout" });
     },
     [logout.rejected]: (state, action) => {
+      rejectedAction({ state, action });
+    },
+    // authenticated
+    [fetchAuthenticated.fulfilled]: (state, action) => {
+      fulfilledAction({ state, action, ACTION_TYPE: "fetchAuthenticated" });
+    },
+    [fetchAuthenticated.rejected]: (state, action) => {
       rejectedAction({ state, action });
     },
   },
