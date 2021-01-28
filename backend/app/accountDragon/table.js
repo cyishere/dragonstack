@@ -30,8 +30,4 @@ class AccountDragonTable {
   }
 }
 
-AccountDragonTable.getAccountDragons({ accountId: 1 })
-  .then(({ accountDragons }) => console.log({ accountDragons }))
-  .catch((error) => console.log({ error }));
-
 module.exports = AccountDragonTable;
