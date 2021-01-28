@@ -14,6 +14,24 @@ class AccountDragonTable {
       );
     });
   }
+
+  static getAccountDragons({ accountId }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'SELECT "dragonId" FROM accountDragon WHERE "accountId" = $1',
+        [accountId],
+        (error, response) => {
+          if (error) return reject(error);
+
+          resolve({ accountDragons: response.rows });
+        }
+      );
+    });
+  }
 }
+
+AccountDragonTable.getAccountDragons({ accountId: 1 })
+  .then(({ accountDragons }) => console.log({ accountDragons }))
+  .catch((error) => console.log({ error }));
 
 module.exports = AccountDragonTable;
