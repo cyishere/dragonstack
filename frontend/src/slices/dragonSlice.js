@@ -15,7 +15,7 @@ const initialState = {
  */
 
 export const fetchDragon = createAsyncThunk("dragon/fetchDragon", () => {
-  return fetch(`${BACKEND.ADDRESS}/dragon/new`)
+  return fetch(`${BACKEND.ADDRESS}/dragon/new`, { credentials: "include" })
     .then((response) => response.json())
     .then((json) => json)
     .catch((error) => {
