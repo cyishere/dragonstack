@@ -4,6 +4,9 @@ const router = new Router();
 const DragonTable = require("../dragon/table");
 const { authenticatedAccount } = require("./helper");
 
+/**
+ * Generate New Dragon
+ */
 router.get("/new", (req, res, next) => {
   let accountId, dragon;
 
@@ -26,6 +29,17 @@ router.get("/new", (req, res, next) => {
       return AccountDragonTable.storeAccountDragon({ accountId, dragonId });
     })
     .then(() => res.json({ dragon }))
+    .catch((error) => next(error));
+});
+
+/**
+ * Update Nickname
+ */
+router.put("/update", (req, res, next) => {
+  const { dragonId, nickname } = req.body;
+
+  DragonTable.updateDragon({ dragonId, nickname })
+    .then(() => res.json({ message: "successfully update dragon" }))
     .catch((error) => next(error));
 });
 
