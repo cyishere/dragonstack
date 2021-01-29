@@ -8,7 +8,7 @@ const initialState = { loggedIn: false };
  * Async Actions
  */
 const fetchFromAccount = ({ endpoint, options }) => {
-  console.log("endpoint", `${BACKEND.ADDRESS}/account/${endpoint}`);
+  // console.log("endpoint", `${BACKEND.ADDRESS}/account/${endpoint}`);
   return fetch(`${BACKEND.ADDRESS}/account/${endpoint}`, options)
     .then((response) => response.json())
     .then((json) => json)
