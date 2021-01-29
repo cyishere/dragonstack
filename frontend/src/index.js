@@ -2,11 +2,13 @@ import React from "react";
 import { render } from "react-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import generationReducer from "./slices/generationSlice";
 import dragonReducer from "./slices/dragonSlice";
 import accountReducer from "./slices/accountSlice";
 import accountDragonsReducer from "./slices/accountDragons";
 import Root from "./components/Root";
+import AccountDragons from "./components/AccountDragons";
 import { fetchAuthenticated } from "./slices/accountSlice";
 import "./index.css";
 
@@ -24,7 +26,12 @@ const store = configureStore({
 store.dispatch(fetchAuthenticated()).then(() => {
   render(
     <Provider store={store}>
-      <Root />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Root} />
+          <Route exact path="/account-dragons" component={AccountDragons} />
+        </Switch>
+      </Router>
     </Provider>,
     document.getElementById("root")
   );
