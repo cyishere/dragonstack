@@ -13,6 +13,7 @@ import dragonReducer from "./slices/dragonSlice";
 import accountReducer from "./slices/accountSlice";
 import accountDragonsReducer from "./slices/accountDragonsSlice";
 import accountInfoReducer from "./slices/accountInfoSlice";
+import publicDragonsReducer from "./slices/publicDragons";
 
 import Root from "./components/Root";
 import AccountDragons from "./components/AccountDragons";
@@ -28,6 +29,7 @@ const store = configureStore({
     generation: generationReducer,
     accountDragons: accountDragonsReducer,
     accountInfo: accountInfoReducer,
+    publicDragons: publicDragonsReducer,
   },
 });
 
