@@ -5,14 +5,24 @@ import { BACKEND } from "../config";
 
 const AccountDragonRow = ({ dragon }) => {
   const [nickname, setNickname] = useState(dragon.nickname);
+  const [isPublic, setIsPublic] = useState(dragon.isPublic);
+  const [saleValue, setSaleValue] = useState(dragon.saleValue);
   const [edit, setEdit] = useState(false);
 
   const toggleEdit = () => {
     setEdit(!edit);
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdateNickname = (e) => {
     setNickname(e.target.value);
+  };
+
+  const handleUpdateSaleValue = (e) => {
+    setSaleValue(e.target.value);
+  };
+
+  const handleUpdateIsPublic = (e) => {
+    setIsPublic(e.target.checked);
   };
 
   const updateDragon = () => {
@@ -22,6 +32,8 @@ const AccountDragonRow = ({ dragon }) => {
       body: JSON.stringify({
         dragonId: dragon.dragonId,
         nickname,
+        isPublic,
+        saleValue,
       }),
     })
       .then((response) => response.json())
@@ -40,19 +52,39 @@ const AccountDragonRow = ({ dragon }) => {
       <input
         type="text"
         value={nickname}
-        onChange={handleUpdate}
+        onChange={handleUpdateNickname}
         disabled={!edit}
       />
       <br />
       <DragonAvatar dragon={dragon} />
 
-      {edit ? (
-        <Button bsStyle="primary" onClick={updateDragon}>
-          Save
-        </Button>
-      ) : (
-        <Button onClick={toggleEdit}>Edit</Button>
-      )}
+      <div>
+        <span>
+          Sale Value:{" "}
+          <input
+            type="number"
+            value={saleValue}
+            disabled={!edit}
+            onChange={handleUpdateSaleValue}
+          />
+        </span>{" "}
+        <span>
+          Public:{" "}
+          <input
+            type="checkbox"
+            disabled={!edit}
+            checked={isPublic}
+            onChange={handleUpdateIsPublic}
+          />
+        </span>
+        {edit ? (
+          <Button bsStyle="primary" onClick={updateDragon}>
+            Save
+          </Button>
+        ) : (
+          <Button onClick={toggleEdit}>Edit</Button>
+        )}
+      </div>
     </div>
   );
 };
