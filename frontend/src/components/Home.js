@@ -15,6 +15,8 @@ const Home = () => {
       <AccountInfo />
       <hr />
       <Link to="/account-dragons">Account Dragons</Link>
+      <br />
+      <Link to="/public-dragons">Public Dragons</Link>
 
       <AuthLogout />
     </div>

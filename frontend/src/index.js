@@ -17,6 +17,7 @@ import publicDragonsReducer from "./slices/publicDragons";
 
 import Root from "./components/Root";
 import AccountDragons from "./components/AccountDragons";
+import PublicDragons from "./components/PublicDragons";
 
 import { fetchAuthenticated } from "./slices/accountSlice";
 
@@ -50,6 +51,7 @@ store.dispatch(fetchAuthenticated()).then(() => {
         <Switch>
           <Route exact path="/" component={Root} />
           <AuthRoute exact path="/account-dragons" component={AccountDragons} />
+          <AuthRoute exact path="/public-dragons" component={PublicDragons} />
         </Switch>
       </Router>
     </Provider>,
