@@ -49,7 +49,9 @@ const PublicDragonRow = ({ dragon }) => {
       </Button>{" "}
       <Button onClick={toggleDisplayMatingOptions}>Sire</Button>
       <br />
-      {displayMatingOptions && <MatingOptions />}
+      {displayMatingOptions && (
+        <MatingOptions patronDragonId={dragon.dragonId} />
+      )}
     </div>
   );
 };

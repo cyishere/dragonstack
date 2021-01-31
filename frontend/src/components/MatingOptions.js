@@ -1,9 +1,31 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+import { BACKEND } from "../config";
 
-const MatingOptions = () => {
+const MatingOptions = ({ patronDragonId }) => {
   const { dragons } = useSelector((state) => state.accountDragons);
+
+  const history = useHistory();
+
+  const mate = ({ matronDragonId, patronDragonId }) => () => {
+    fetch(`${BACKEND.ADDRESS}/dragon/mate`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ matronDragonId, patronDragonId }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        alert(json.message);
+
+        if (json.type !== "error") {
+          history.push("/account-dragons");
+        }
+      })
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <div>
@@ -13,7 +35,9 @@ const MatingOptions = () => {
 
         return (
           <span key={dragonId}>
-            <Button>
+            <Button
+              onClick={mate({ patronDragonId, matronDragonId: dragonId })}
+            >
               G{generationId}.I{dragonId}.{nickname}
             </Button>{" "}
           </span>
