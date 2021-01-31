@@ -51,6 +51,7 @@ const dragonSlice = createSlice({
           traits,
           isPublic,
           saleValue,
+          sireValue,
         } = action.payload.dragon;
 
         state.generationId = generationId;
@@ -60,6 +61,7 @@ const dragonSlice = createSlice({
         state.traits = traits;
         state.isPublic = isPublic;
         state.saleValue = saleValue;
+        state.sireValue = sireValue;
       }
     },
     [fetchDragon.rejected]: (state, action) => {
