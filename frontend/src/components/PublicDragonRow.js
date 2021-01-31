@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import DragonAvatar from "./DragonAvatar";
 import { BACKEND } from "../config";
+import MatingOptions from "./MatingOptions";
 
 const PublicDragonRow = ({ dragon }) => {
+  const [displayMatingOptions, setDisplayMatingOptions] = useState(false);
+
+  const toggleDisplayMatingOptions = () => {
+    setDisplayMatingOptions(!displayMatingOptions);
+  };
+
   const history = useHistory();
 
   const handleBuy = () => {
@@ -31,9 +38,18 @@ const PublicDragonRow = ({ dragon }) => {
     <div>
       <div>{dragon.nickname}</div>
       <DragonAvatar dragon={dragon} />
-      <div>Sale Value: {dragon.saleValue}</div>
+      <div>
+        <span>Sale Value: {dragon.saleValue}</span>
+        {" | "}
+        <span>Sire Value: {dragon.sireValue}</span>
+      </div>
       <br />
-      <Button onClick={handleBuy}>Buy</Button>
+      <Button bsStyle="primary" onClick={handleBuy}>
+        Buy
+      </Button>{" "}
+      <Button onClick={toggleDisplayMatingOptions}>Sire</Button>
+      <br />
+      {displayMatingOptions && <MatingOptions />}
     </div>
   );
 };

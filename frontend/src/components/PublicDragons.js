@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPublicDragons } from "../slices/publicDragons";
+import { fetchDragonsByAccount } from "../slices/accountDragonsSlice";
 import PublicDragonRow from "./PublicDragonRow";
 
 const PublicDragons = () => {
@@ -10,6 +11,7 @@ const PublicDragons = () => {
 
   useEffect(() => {
     dispatch(fetchPublicDragons());
+    dispatch(fetchDragonsByAccount());
   }, []);
 
   return (
