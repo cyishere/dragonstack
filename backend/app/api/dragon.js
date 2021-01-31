@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const AccountTable = require("../account/table");
 const AccountDragonTable = require("../accountDragon/table");
-const { getPublicDragons } = require("../dragon/helper");
+const { getPublicDragons, getDragonWithTraits } = require("../dragon/helper");
 const router = new Router();
 const DragonTable = require("../dragon/table");
 const { authenticatedAccount } = require("./helper");
+const Breeder = require("../dragon/breeder");
 
 /**
  * Generate New Dragon
@@ -123,6 +124,80 @@ router.post("/buy", (req, res, next) => {
       ]);
     })
     .then(() => res.json({ message: "Deal success!" }))
+    .catch((error) => next(error));
+});
+
+/**
+ * Mate
+ */
+router.post("/mate", (req, res, next) => {
+  const { matronDragonId, patronDragonId } = req.body;
+
+  if (matronDragonId === patronDragonId) {
+    throw new Error("Cannot breed with the same dragon!");
+  }
+
+  let matronDragon, patronDragon, patronSireValue;
+  let matronAccountId, patronAccountId;
+
+  getDragonWithTraits({ dragonId: patronDragonId })
+    .then((dragon) => {
+      if (!dragon.isPublic) {
+        throw new Error("Dragon must be public");
+      }
+
+      patronDragon = dragon;
+      patronSireValue = dragon.sireValue;
+
+      return getDragonWithTraits({ dragonId: matronDragonId });
+    })
+    .then((dragon) => {
+      matronDragon = dragon;
+
+      return authenticatedAccount({ sessionString: req.cookies.sessionString });
+    })
+    .then(({ account, authenticated }) => {
+      if (!authenticated) throw new Error("Unauthenticated");
+
+      if (patronSireValue > account.balance) {
+        throw new Error("Sire value exceeds balance");
+      }
+
+      matronAccountId = account.id;
+
+      return AccountDragonTable.getDragonAccount({ dragonId: patronDragonId });
+    })
+    .then(({ accoundId }) => {
+      patronAccountId = accoundId;
+
+      if (matronAccountId === patronAccountId) {
+        throw new Error("Cannot breed your own dragons!");
+      }
+
+      const dragon = Breeder.breedDragon({
+        matron: matronDragon,
+        patron: patronDragon,
+      });
+
+      return DragonTable.storeDragon(dragon);
+    })
+    .then(({ dragonId }) => {
+      Promise.all([
+        AccountTable.updateBalance({
+          accountId: matronAccountId,
+          value: -patronSireValue,
+        }),
+        AccountTable.updateBalance({
+          accountId: patronAccountId,
+          value: patronSireValue,
+        }),
+        AccountDragonTable.storeAccountDragon({
+          dragonId,
+          accountId: matronAccountId,
+        }),
+      ]);
+    })
+    .then(() => res.json({ message: "Breed success!" }))
     .catch((error) => next(error));
 });
 
